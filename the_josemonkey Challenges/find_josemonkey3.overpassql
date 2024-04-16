@@ -12,16 +12,22 @@
   
 // Let's assume he is in the US.
 //[bbox:22.1, -122.9, 46.2, -49.9]; // <-- this is the old way
-area[name="United States"]->.boundary_area;
+// area[name="United States"]->.boundary_area; // <-- disregarded for poly.
 
 // What we want to query for is first all the Holiday Inn Variants inside the US (should be around 3K in the US)
-nwr(area.boundary_area)[name~"^Holiday In.*"];
+//nwr(area.boundary_area)[name~"^Holiday In.*"]; // <-- this is if we stuck to the area above.
+
+/* 
+    Ok new way. Let's do a polygon. We're goign to try by catching the cross into the US west of Del Rio, 
+    then go north east to st louis, then continuing on to try to match the arc as best as possible.
+*/
+nwr(poly:"29.56005 -101.24596 38.64749 -90.18076 43.89516 -78.80089 47.05535 -67.77745 45.60329 -67.4409 42.97244 -76.05393 38.38832 -85.91413 33.23460 -94.04559 27.97923 -99.93031")[name~"^Holiday In.*"];
 
 // Next let's grab any Hampton Inns within 100 meters of the Holiday Inn Variants
 nwr(around:100)[name~"^Hampton In.*"];
 
 // Finally, find all the fuel stations withi 400 meters of that.
-node(around:400)[amenity="fuel"];
+//node(around:400)[amenity="fuel"]; // <-- See below, this was by luck and not in the video.
       
 (._;>;);
 
@@ -43,5 +49,9 @@ node(around:400)[amenity="fuel"];
       around, but I liked the larger show me all the things view.
     * I set a boundary area of the United States, but I could do by state like
       this: nwr[name~"^Holiday In.*"]["addr:state"="NY"];
+    * I just went back and tried the Poly method to limit the results of the first two 
+      items we could clearly see in the video to a polygon roughly showing where totality
+      would be (based on his commentary in the video). That gave us 20 results, muchy
+      more manageable.
 */
 out;
