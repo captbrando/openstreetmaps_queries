@@ -29,7 +29,6 @@
 )->.boundary_area;
 
 // Now we can clearly see a Waffle House in the video, so let's use that as a starting point.
-//nwr(area.boundary_area)[name~"^Waffle Hous.*"];
 nwr(area.boundary_area)["amenity"="restaurant"]["brand"="Waffle House"];
 
 // Next let's grab any Gas Stations within 150 meters of Waffle Houses
