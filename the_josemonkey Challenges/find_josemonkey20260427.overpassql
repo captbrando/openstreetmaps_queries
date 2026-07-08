@@ -48,9 +48,9 @@ nwr["man_made"="water_tower"](around.nearby_hotels:300)->.nearby_water_towers;
 /* 
   Ok this finally refined query only returned 2 results, and it was the first one I checked.
   I went through several iterations of this looking for BP stations, but that was the big 
-  holdup. I think the main issue for me was the fact that I couldn't just the distance.
+  holdup. I think the main issue for me was the fact that I couldn't judge the distance.
   Finding this place was a little bit of luck because the fuel station found in the query
-  was not a BP station, but on the other side. So 
+  was not a BP station, so I just tried a generic fuel station as noted above. 
 
   Some notes on this one:
     * Had he been standing slightly farther from the awning, I might have been able
@@ -61,6 +61,7 @@ nwr["man_made"="water_tower"](around.nearby_hotels:300)->.nearby_water_towers;
       what hotel chain slowed things down a bit.
     * Altering the distance for the gas station (450) & adding the brand to the query I got
       four results: nwr["amenity"="fuel"]["brand"="BP"](around.waffle_houses:450)->.nearby_fuel;
+      This was problematic as I discuss.
     * Jose was standing at these coordinates: 32.631662, -80.875894, in front of the Best Western
       Point South in Yemassee, South Carolina. Google thinks it is temporarily closed.
     * My OverpassQL query is here: https://overpass-turbo.eu/s/2oNf
